@@ -1,14 +1,22 @@
-node('nodejs') {
- stage('Checkout') {
- git branch: 'main',
-  url: 'https://github.com/aksheykotwal/do-400-pipelines-control'
- }
+pipeline{
+ agent{
+   node{
+     label 'nodejs'
+   }
+  }
+
+stages {
+
  stage('Backend Tests') {
-  sh 'node ./backend/test.js'
+steps{  
+sh 'node ./backend/test.js'
+}
  }
  stage('Frontend Tests') {
+steps{
   sh 'node ./frontend/test.js'
  }
 }
-
+}
+}
 
